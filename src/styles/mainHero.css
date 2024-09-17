@@ -1,0 +1,51 @@
+.hero-info-container {
+  @apply relative bg-cover bg-center flex items-center justify-center py-16;
+}
+
+.internal-hero {
+  max-width: 1360px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.hero-overlay {
+  @apply absolute inset-0 backdrop-blur-md bg-blue-500 bg-opacity-30 z-0;
+}
+
+.posterImg {
+  @apply rounded-xl;
+}
+
+.title-movie {
+  @apply text-6xl text-white font-semibold drop-shadow-lg;
+}
+
+.contentInfo-movie {
+  @apply text-white text-xl drop-shadow-lg;
+}
+
+.movieYear {
+  @apply text-white text-2xl;
+}
+
+.section-movies {
+  @apply bg-blue-950;
+}
+
+.movies-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 4rem 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+.movies-container li {
+  list-style: none;
+}
+
+.poster-img {
+  width: 100%;
+  border-radius: 16px;
+}

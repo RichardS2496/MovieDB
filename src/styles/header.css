@@ -1,0 +1,3 @@
+.header-container {
+  @apply flex flex-row justify-between bg-blue-700 px-8 py-4;
+}

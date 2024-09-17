@@ -1,0 +1,21 @@
+.section-movies {
+  @apply bg-blue-950;
+}
+
+.movies-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.movies-container li {
+  list-style: none;
+}
+
+.poster-img {
+  width: 100%;
+  border-radius: 12px;
+}
