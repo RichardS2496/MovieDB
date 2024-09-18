@@ -9,10 +9,10 @@ export function MovieDetail() {
   const [isError, setIsError] = useState(false);
   const [videos, setVideos] = useState([]);
 
+  const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=323cef98976b05a753dadb769997b6c2`
-    )
+    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
       .then((response) => response.json())
       .then((data) => {
         setMovie(data);
@@ -25,9 +25,7 @@ export function MovieDetail() {
         setIsLoading(false);
       });
 
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=323cef98976b05a753dadb769997b6c2`
-    )
+    fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`)
       .then((response) => response.json())
       .then((data) => {
         setVideos(data.results);
@@ -35,7 +33,7 @@ export function MovieDetail() {
       .catch((error) => {
         console.error("Error loading videos:", error);
       });
-  }, [id]);
+  }, [id, API_KEY]);
 
   if (isError) return <div>Error loading movie details.</div>;
   if (isLoading) return <div>Loading...</div>;
@@ -60,7 +58,7 @@ export function MovieDetail() {
           <div className="video-container">
             {videos
               .filter((video) => video.type === "Trailer")
-              .slice(0, 1)
+              .slice(1, 2)
               .map((video) => (
                 <iframe
                   key={video.id}

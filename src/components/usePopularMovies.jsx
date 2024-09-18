@@ -5,8 +5,7 @@ const fetcher = (url) =>
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMjNjZWY5ODk3NmIwNWE3NTNkYWRiNzY5OTk3YjZjMiIsIm5iZiI6MTcyNTY5NjE1OC42MDMwMTEsInN1YiI6IjY1Zjk2NDQ5MzNhMzc2MDE4NDM2ZGQwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pAKxyUm_EcIgUhI4oa2kxIkRu0u76l8IOxNVgbxxsKg",
+      Authorization: `Bearer ${import.meta.env.VITE_BEARER_TOKEN}`,
     },
   }).then((res) => res.json());
 
@@ -17,7 +16,7 @@ export function usePopularMovies() {
   );
 
   return {
-    movies: data?.results,
+    movies: data?.results || [],
     isLoading: !error && !data,
     isError: error,
   };
