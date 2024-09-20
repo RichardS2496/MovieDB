@@ -39,7 +39,13 @@ export function MainHero() {
           <div className="flex flex-col gap-4">
             <h4 className="title-movie">{movieInfo.title}</h4>
             <h5 className="movieYear">{shortMovieYear(findYear)}</h5>
-            <p className="contentInfo-movie">{movieInfo.overview}</p>
+            <p className="contentInfo-movie font-light">{movieInfo.overview}</p>
+            <Link
+              className="bg-blue-700 px-8 py-3 w-fit rounded-full text-white font-bold"
+              to={`/movie/${movieInfo.id}`}
+            >
+              Read More
+            </Link>
           </div>
         </div>
       </section>

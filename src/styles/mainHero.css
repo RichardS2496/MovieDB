@@ -9,7 +9,7 @@
 }
 
 .hero-overlay {
-  @apply absolute inset-0 backdrop-blur-md bg-blue-500 bg-opacity-30 z-0;
+  @apply absolute inset-0 backdrop-blur-md bg-blue-950/70 bg-opacity-30 z-0;
 }
 
 .posterImg {
@@ -21,7 +21,7 @@
 }
 
 .contentInfo-movie {
-  @apply text-white text-xl drop-shadow-lg;
+  @apply text-white text-xl drop-shadow-xl;
 }
 
 .movieYear {
@@ -29,7 +29,7 @@
 }
 
 .section-movies {
-  @apply bg-blue-950;
+  @apply bg-gray-800;
 }
 
 .movies-container {

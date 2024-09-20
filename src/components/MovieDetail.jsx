@@ -11,71 +11,135 @@ export function MovieDetail() {
 
   const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
+  function shortMovieDate(releaseDate) {
+    if (!releaseDate) return "";
+    const editDate = releaseDate.split("-");
+    const yearMovie = editDate[0];
+
+    return yearMovie;
+  }
+
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMovie(data);
+    async function fetchMovieDetails() {
+      try {
+        const movieResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+        );
+        const movieData = await movieResponse.json();
+        setMovie(movieData);
         setIsLoading(false);
-        console.log(data);
-      })
-      .catch((error) => {
+        console.log(movieData);
+      } catch (error) {
         console.error(error);
         setIsError(true);
         setIsLoading(false);
-      });
+      }
+    }
 
-    fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVideos(data.results);
-      })
-      .catch((error) => {
+    async function fetchMovieVideos() {
+      try {
+        const videosResponse = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
+        );
+        const videosData = await videosResponse.json();
+        setVideos(videosData.results);
+      } catch (error) {
         console.error("Error loading videos:", error);
-      });
+      }
+    }
+
+    fetchMovieDetails();
+    fetchMovieVideos();
   }, [id, API_KEY]);
 
   if (isError) return <div>Error loading movie details.</div>;
   if (isLoading) return <div>Loading...</div>;
+  const backgroundImage = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
 
   return (
-    <section className="movieDetails-section">
-      <div className="info-container">
-        <img
-          className="h-[420px]"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-        />
-        <div>
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-        </div>
-      </div>
+    <>
+      <section
+        className="movieDetails-section relative"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div className="hero-overlay"></div>
 
-      <div className="videos-section">
-        <h2>Trailers & Videos</h2>
-        {videos.length > 0 ? (
-          <div className="video-container">
-            {videos
-              .filter((video) => video.type === "Trailer")
-              .slice(1, 2)
-              .map((video) => (
-                <iframe
-                  key={video.id}
-                  src={`https://www.youtube.com/embed/${video.key}`}
-                  title={video.name}
-                  width="560"
-                  height="315"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              ))}
+        {/* Contenido principal */}
+        <div className="info-container">
+          <img
+            className="h-[380px] rounded-xl"
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+          />
+          <div className="flex flex-col gap-4">
+            <h5 className="movieYear">{shortMovieDate(movie.release_date)}</h5>
+            <h1 className="text-white font-bold text-7xl drop-shadow-lg pb-2">
+              {movie.title}
+            </h1>
+            <ul className="genre-list">
+              {movie.genres.map((genre) => {
+                return (
+                  <li className="genre-name" key={genre.id}>
+                    {genre.name}
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="text-white font-light text-2xl drop-shadow-lg">
+              {movie.overview}
+            </p>
           </div>
-        ) : (
-          <p>No videos available for this movie.</p>
-        )}
-      </div>
-    </section>
+        </div>
+
+        {/* Sección de videos */}
+        <div className="videos-section pb-8">
+          <h2 className="w-2/3 text-white font-bold text-6xl leading-tight drop-shadow-lg">
+            Watch NOW the trailer or related video!
+          </h2>
+          {videos.length > 0 ? (
+            <div className="video-container w-1/2 h-80 rounded-xl">
+              {videos
+                .filter((video) => video.type === "Trailer")
+                .slice(0)
+                .map((video) => (
+                  <iframe
+                    key={video.id}
+                    src={`https://www.youtube.com/embed/${video.key}`}
+                    title={video.name}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                ))}
+            </div>
+          ) : (
+            <p>No videos available for this movie.</p>
+          )}
+        </div>
+
+        {/* Sección de productores */}
+        <div className="productor-section relative">
+          <div className="productor-logo-container">
+            {movie.production_companies.map((productionCompany) => {
+              return productionCompany.logo_path ? (
+                <img
+                  key={productionCompany.id}
+                  src={`https://image.tmdb.org/t/p/w500${productionCompany.logo_path}`}
+                  alt={productionCompany.name}
+                  className="logo-productor"
+                />
+              ) : null;
+            })}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

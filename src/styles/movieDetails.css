@@ -1,5 +1,5 @@
 .movieDetails-section {
-  @apply bg-blue-950 h-screen;
+  @apply bg-blue-950;
 }
 
 .info-container {
@@ -9,4 +9,60 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
+}
+
+.movieYear {
+  @apply text-base font-light;
+}
+
+.videos-section {
+  @apply flex flex-row justify-between items-center;
+  max-width: 1360px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.video-container {
+  overflow: hidden;
+}
+
+.productor-section {
+  @apply bg-white;
+}
+
+.productor-logo-container {
+  @apply flex flex-row gap-4 mx-auto py-8 justify-around;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 6, 68, 0.4);
+  z-index: 1; /* Debajo de los elementos de contenido, pero por encima del fondo */
+}
+
+.info-container,
+.videos-section,
+.productor-section {
+  position: relative;
+  z-index: 2; /* Por encima del overlay */
+}
+
+.logo-productor {
+  width: 180px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.25));
+}
+
+.genre-list {
+  @apply flex flex-row text-blue-950 font-semibold gap-4 text-xs;
+}
+
+.genre-name {
+  @apply bg-white py-1 px-4 rounded-full;
 }

@@ -1,3 +1,4 @@
 .header-container {
-  @apply flex flex-row justify-between bg-blue-700 px-8 py-4;
+  @apply flex flex-row justify-between bg-gray-800 px-8 py-4;
+  margin: 0 auto;
 }
