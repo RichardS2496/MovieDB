@@ -56,6 +56,8 @@ export function MovieDetail() {
   if (isLoading) return <div>Loading...</div>;
   const backgroundImage = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
 
+  const score_number = Math.floor(movie.vote_average * 10);
+
   return (
     <>
       <section
@@ -72,7 +74,7 @@ export function MovieDetail() {
         {/* Contenido principal */}
         <div className="info-container">
           <img
-            className="h-[380px] rounded-xl"
+            className="h-[580px] rounded-xl"
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
           />
@@ -90,9 +92,28 @@ export function MovieDetail() {
                 );
               })}
             </ul>
-            <p className="text-white font-light text-2xl drop-shadow-lg">
+            <h4 className=" text-slate-300 text-2xl font-bold">OVERVIEW</h4>
+
+            <p className="text-white font-light text-xl drop-shadow-lg">
               {movie.overview}
             </p>
+            <div className="flex flex-row gap-12 items-start">
+              <div className="flex flex-col gap-4 items-start">
+                <h4 className=" text-slate-300 text-2xl font-bold">
+                  USER SCORE
+                </h4>
+                <span className=" bg-slate-300 w-10 h-10 p-9 flex items-center justify-center rounded-full text-xl font-bold">
+                  {score_number}%
+                </span>
+              </div>
+            </div>
+            <a
+              className="bg-blue-700 px-8 py-3 w-fit rounded-full text-white font-bold"
+              href={movie.homepage}
+              target="_blank"
+            >
+              Visit Website
+            </a>
           </div>
         </div>
 
