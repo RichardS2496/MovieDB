@@ -14,7 +14,7 @@ export function MovieCard({ movieData }) {
           {shortMovieYear(findYear)}
         </span>
         <h2
-          className=" text-white font-bold text-2xl drop-shadow-2xl"
+          className=" text-white font-bold text-xl drop-shadow-2xl"
           style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.4)" }}
         >
           {movieData.title}

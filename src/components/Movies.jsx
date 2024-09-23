@@ -1,9 +1,10 @@
 import { usePopularMovies } from "./usePopularMovies";
 import { MovieCard } from "./MovieCard";
-import "../styles/mainHero.css";
+import "../styles/moviesView.css";
 import { Link } from "react-router-dom";
+import { MoviesLateralMenu } from "./MoviesLateralMenu";
 
-export function MainHero() {
+export function Movies() {
   const { movies, isLoading, isError } = usePopularMovies();
 
   if (isError) return <div>Something went wrong</div>;
@@ -21,6 +22,7 @@ export function MainHero() {
 
   return (
     <>
+      {/* Sección de encabezado con la película destacada */}
       <section
         className="hero-info-container"
         style={{
@@ -34,7 +36,7 @@ export function MainHero() {
           <img
             className="posterImg"
             src={`https://image.tmdb.org/t/p/w500${movieInfo.poster_path}`}
-            alt=""
+            alt="Poster"
           />
           <div className="flex flex-col gap-4">
             <h4 className="title-movie">{movieInfo.title}</h4>
@@ -49,16 +51,29 @@ export function MainHero() {
           </div>
         </div>
       </section>
+
+      {/* Sección principal con el menú lateral (MoviesLateralMenu) y la lista de películas */}
       <section className="section-movies">
-        <ul className="movies-container">
-          {movies.slice(1).map((movieData) => (
-            <li key={movieData.id}>
-              <Link to={`/movie/${movieData.id}`}>
-                <MovieCard movieData={movieData} />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="movies-listViewer">
+          {/* MoviesLateralMenu actúa como el menú lateral o sidebar */}
+          <MoviesLateralMenu />
+
+          {/* Contenedor principal de las películas populares */}
+          <div className="movies-container">
+            <h4 className="text-slate-300 text-2xl font-bold">
+              POPULAR MOVIES
+            </h4>
+            <ul className="ul-container">
+              {movies.slice(1).map((movieData) => (
+                <li key={movieData.id}>
+                  <Link to={`/movie/${movieData.id}`}>
+                    <MovieCard movieData={movieData} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
     </>
   );

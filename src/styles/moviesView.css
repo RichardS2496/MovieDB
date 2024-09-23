@@ -29,13 +29,25 @@
 }
 
 .section-movies {
-  @apply bg-gray-800;
+  @apply bg-gray-800 p-8;
 }
 
 .movies-container {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.movies-listViewer {
   max-width: 1360px;
   margin: 0 auto;
-  padding: 4rem 0;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.ul-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
@@ -48,4 +60,8 @@
 .poster-img {
   width: 100%;
   border-radius: 16px;
+}
+
+.sidebarMovies li Link {
+  width: 100%;
 }
