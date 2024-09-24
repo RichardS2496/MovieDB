@@ -21,13 +21,13 @@ export function Header() {
         </form>
       </div>
 
-      <div className="flex flex-row gap-4">
-        <nav>
+      <div className="flex flex-row items-center">
+        <nav className="flex flex-row gap-8">
           <Link to="/movies" element={<Movies />}>
             Movies
           </Link>
           <Link to="/series" element={<Series />}>
-            Series
+            TV Series
           </Link>
         </nav>
       </div>

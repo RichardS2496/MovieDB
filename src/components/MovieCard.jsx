@@ -1,8 +1,9 @@
 export function MovieCard({ movieData }) {
   if (!movieData) return null;
 
-  const findYear = movieData.release_date.split("-");
-
+  // Verificamos si movieData tiene la propiedad release_date antes de usar split
+  const releaseDate = movieData?.release_date || ""; // Si release_date no existe, usamos un string vacío
+  const findYear = releaseDate ? releaseDate.split("-") : ["N/A"];
   function shortMovieYear(findYear) {
     return findYear[0];
   }
