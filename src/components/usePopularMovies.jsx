@@ -6,6 +6,7 @@ const fetcher = (url) =>
     headers: {
       accept: "application/json",
       Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMjNjZWY5ODk3NmIwNWE3NTNkYWRiNzY5OTk3YjZjMiIsIm5iZiI6MTcyNjk5MzU1NS44NDM0Miwic3ViIjoiNjVmOTY0NDkzM2EzNzYwMTg0MzZkZDA0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.rDpcOn6p04i_F_M0F5l9S7tFwT840WiJVMGhkDJXxzU`,
+      // ${import.meta.env.VITE_BEARER_TOKEN}
     },
   }).then((res) => res.json());
 

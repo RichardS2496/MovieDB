@@ -9,7 +9,7 @@ export function MovieDetail() {
   const [isError, setIsError] = useState(false);
   const [videos, setVideos] = useState([]);
 
-  const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+  const API_KEY = "323cef98976b05a753dadb769997b6c2";
 
   function shortMovieDate(releaseDate) {
     if (!releaseDate) return "";
